@@ -3,6 +3,10 @@ from fastapi.responses import FileResponse
 import subprocess
 import uuid
 import os
+import shutil
+
+shutil.copy("/etc/secrets/cookies.txt", "/tmp/cookies.txt")
+
 
 app = FastAPI()
 
@@ -27,8 +31,16 @@ def get_url(url: str,name: str):
     clear_downloads()
 
     result=subprocess.run(
-    [  "yt-dlp", "--cookies", "/etc/secrets/cookies.txt","--extractor-args", "youtube:player_client=web_embedded",  "-f", "bestaudio", 
-     "--extract-audio",  "--audio-format", "m4a",  "--no-playlist",  "-o", f"downloads/{name}.m4a",url ],
+    [   "yt-dlp",
+        "--cookies", "/tmp/cookies.txt",
+        "--extractor-args", "youtube:player_client=web_embedded",
+        "-f", "bestaudio",
+        "--extract-audio",
+        "--audio-format", "m4a",    
+        "--no-playlist",
+        "-o", f"downloads/{name}.m4a",
+        url
+    ],
         capture_output=True,
         text=True
     )
@@ -45,7 +57,6 @@ def get_url(url: str,name: str):
         media_type="audio/mp4",
         filename=f"{name}.m4a"
     )
-
 
 
 
