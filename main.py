@@ -25,18 +25,16 @@ def clear_downloads():
 def get_url(url: str,name: str):
 
     clear_downloads()
-    file_id=str(uuid.uuid4())
-    file_path=f"downloads/{file_id}.m4a"
 
     result=subprocess.run(
-    ["yt-dlp", "--extractor-args","youtube:player_client=web_embedded","-f","bestaudio","--extract-audio","--audio-format","m4a","--no-playlist","-o", file_path, url],
+    ["yt-dlp", "--extractor-args","youtube:player_client=web_embedded","-f","bestaudio","--extract-audio","--audio-format","m4a","--no-playlist","-o", f"downloads/{name}.m4a", f"{url}"],
         capture_output=True,
         text=True,
         check=True
     )
 
     return FileResponse(
-        path=file_path,
+        path=f"downloads/{name}.m4a",
         media_type="audio/mp4",
         filename=f"{name}.m4a"
     )
