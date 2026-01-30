@@ -28,8 +28,7 @@ def get_url(url: str,name: str):
 
     result=subprocess.run(
     [  "yt-dlp", "--cookies", "/app/cookies.txt","--extractor-args", "youtube:player_client=web_embedded",  "-f", "bestaudio", 
-     "--extract-audio",  "--audio-format", "m4a",  "--no-playlist",  "-o", f"downloads/{name}.m4a",url ]
-
+     "--extract-audio",  "--audio-format", "m4a",  "--no-playlist",  "-o", f"downloads/{name}.m4a",url ],
         capture_output=True,
         text=True
     )
@@ -46,6 +45,7 @@ def get_url(url: str,name: str):
         media_type="audio/mp4",
         filename=f"{name}.m4a"
     )
+
 
 
 
