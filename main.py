@@ -29,13 +29,20 @@ def get_url(url: str,name: str):
     result=subprocess.run(
     ["yt-dlp", "--extractor-args","youtube:player_client=web_embedded","-f","bestaudio","--extract-audio","--audio-format","m4a","--no-playlist","-o", f"downloads/{name}.m4a", f"{url}"],
         capture_output=True,
-        text=True,
-        check=True
+        text=True
     )
+    
+    if result.returncode != 0:
+        raise HTTPException(
+            status_code=400,
+            detail=result.stderr
+        )
 
+    
     return FileResponse(
         path=f"downloads/{name}.m4a",
         media_type="audio/mp4",
         filename=f"{name}.m4a"
     )
+
 
