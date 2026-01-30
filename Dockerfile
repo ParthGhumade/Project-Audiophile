@@ -15,7 +15,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # python dependancies
 
 COPY main.py .
-COPY downloads ./downloads
+RUN mkdir -p downloads && chmod 777 downloads
 #copied the code from dir to dockerfile
 
 EXPOSE 10000
