@@ -27,7 +27,7 @@ def get_url(url: str,name: str):
     clear_downloads()
 
     result=subprocess.run(
-    ["yt-dlp", "--extractor-args","-f","bestaudio","--extract-audio","--audio-format","m4a","--no-playlist","-o", f"downloads/{name}.m4a", f"{url}"],
+    ["yt-dlp","-f","bestaudio","--extract-audio","--audio-format","m4a","--no-playlist","-o", f"downloads/{name}.m4a", f"{url}"],
         capture_output=True,
         text=True
     )
@@ -44,6 +44,7 @@ def get_url(url: str,name: str):
         media_type="audio/mp4",
         filename=f"{name}.m4a"
     )
+
 
 
 
