@@ -17,7 +17,7 @@ def get_url(url: str,name: str):
     file_path=f"downloads/{file_id}.m4a"
 
     result=subprocess.run(
-    ["./yt-dlp", "--extractor-args","youtube:player_client=web_embedded","-f","bestaudio[ext=m4a]","-o", file_path, "--print","after_move:filepath", url],
+    ["yt-dlp", "--extractor-args","youtube:player_client=web_embedded","-f","bestaudio[ext=m4a]","-o", file_path, "--print","after_move:filepath", url],
         capture_output=True,
         text=True,
         check=True
@@ -28,3 +28,4 @@ def get_url(url: str,name: str):
         media_type="audio/mp4",
         filename=f"{name}.m4a"
     )
+
